@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: management
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: teacher
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: schooldb
+      PGDATA: /data/postgres
+    volumes:
+      - db_data:/data/postgres
+    ports:
+      - "1234:5432"
+    networks:
+      - db
+
+volumes:
+  db_data:
+
+networks:
+  db:
+    driver: bridge
