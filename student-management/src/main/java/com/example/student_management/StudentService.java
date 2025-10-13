@@ -1,9 +1,8 @@
 package com.example.student_management;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +54,25 @@ public class StudentService {
 
     public List<Student> findByCourse(String course){
         return studentRepository.findByCourse(course);
+    }
+
+    public StudentResponseDTO convertToDTO(Student student){
+        StudentResponseDTO studentDTO = new StudentResponseDTO();
+        studentDTO.setName(student.getName());
+        studentDTO.setEmail(student.getEmail());
+        studentDTO.setCourse(student.getCourse());
+        studentDTO.setEnrollmentDate((student.getEnrollmentDate()));
+
+        return studentDTO;
+    }
+    public Student convertToStudent(StudentRequestDTO studentRequestDTO){
+        Student student = new Student();
+        student.setName(studentRequestDTO.getName());
+        student.setEmail(studentRequestDTO.getEmail());
+        student.setCourse(studentRequestDTO.getCourse());
+        student.setAge(studentRequestDTO.getAge());
+        student.setEnrollmentDate(LocalDate.now());
+        return studentRepository.save(student);
     }
 
 }
