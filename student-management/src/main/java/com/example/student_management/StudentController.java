@@ -1,5 +1,6 @@
 package com.example.student_management;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,15 +40,16 @@ public class StudentController {
 
 
     @PostMapping("/students")
-    public StudentResponseDTO postStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
+    public StudentResponseDTO postStudent(@Valid @RequestBody StudentRequestDTO studentRequestDTO) {
         Student savedStudent = studentService.convertToStudent(studentRequestDTO);
         return studentService.convertToDTO(savedStudent);
     }
 
 
     @PutMapping("/students/{id}")
-    public Student updateStudent(@PathVariable int id, @RequestBody Student student){
-        return studentService.updateStudent(id,student);
+    public Student updateStudent(@PathVariable int id, @Valid @RequestBody StudentRequestDTO studentRequestDTO) {
+        Student updatedStudent = studentService.convertToStudent(studentRequestDTO);
+        return studentService.updateStudent(id, updatedStudent);
     }
 
     @DeleteMapping("/students/{id}")
@@ -60,4 +62,6 @@ public class StudentController {
     public List<Student> searchByCourse(@RequestParam String course){
         return studentService.findByCourse(course);
     }
+
+
 }

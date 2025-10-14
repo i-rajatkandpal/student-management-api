@@ -16,8 +16,7 @@ public class Student {
     @Column(unique = true)
     private String email;
 
-    @Min(value = 1)
-    private int age;
+    private @Min(value = 1) Integer age;
 
     private String course;
 
@@ -47,11 +46,11 @@ public class Student {
         this.email = email;
     }
 
-    public int getAge() {
+    public @Min(value = 1) Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(@Min(value = 1) Integer age) {
         this.age = age;
     }
 
