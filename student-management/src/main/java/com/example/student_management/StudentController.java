@@ -15,12 +15,6 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-// without the DTO exposing every field
-//    @GetMapping("/students")
-//    public List<Student> getStudents(){
-//        return studentService.getAllStudents();
-//    }
-
     @GetMapping("/students")
         public  List<StudentResponseDTO> getStudents(){
             return studentService.getAllStudents().
@@ -28,20 +22,15 @@ public class StudentController {
         }
 
     @GetMapping("/students/{id}")
-    public Student getStudentsById(@PathVariable int id) {
-        return studentService.getStudentById(id);
+    public StudentResponseDTO getStudentById(@PathVariable int id) {
+        Student student = studentService.getStudentById(id);
+        return studentService.convertToDTO(student);
     }
-
-    // without requestDTO
-    // @PostMapping("/students")
-//    public Student postStudent(@RequestBody Student student){
-//        return studentService.createStudent(student);
-//    }
-
 
     @PostMapping("/students")
     public StudentResponseDTO postStudent(@Valid @RequestBody StudentRequestDTO studentRequestDTO) {
-        Student savedStudent = studentService.convertToStudent(studentRequestDTO);
+        Student student = studentService.convertToStudent(studentRequestDTO);
+        Student savedStudent = studentService.createStudent(student);
         return studentService.convertToDTO(savedStudent);
     }
 
@@ -59,9 +48,13 @@ public class StudentController {
     }
 
     @GetMapping("/students/search")
-    public List<Student> searchByCourse(@RequestParam String course){
-        return studentService.findByCourse(course);
+    public List<StudentResponseDTO> searchByCourse(@RequestParam String course) {
+        List<Student> students = studentService.findByCourse(course);
+        return students.stream()
+                .map(studentService::convertToDTO)
+                .toList();
     }
+
 
 
 }

@@ -3,6 +3,7 @@ package com.example.student_management;
 import java.time.LocalDate;
 
 public class StudentResponseDTO {
+    private int id;
     private String name;
     private String email;
     private String course;
@@ -40,6 +41,11 @@ public class StudentResponseDTO {
         this.enrollmentDate = enrollmentDate;
     }
 
+    public int getId() {
+        return id;
+    }
 
-
+    public void setId(int id) {
+        this.id = id;
+    }
 }

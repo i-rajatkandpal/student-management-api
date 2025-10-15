@@ -1,12 +1,11 @@
 package com.example.student_management;
 
-
 import jakarta.validation.constraints.*;
 
 public class StudentRequestDTO {
 
     @NotBlank(message = "Name cannot be blank")
-    @Size(min = 2,max = 50)
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
     @NotBlank(message = "Course cannot be blank")
@@ -16,7 +15,7 @@ public class StudentRequestDTO {
     @NotBlank(message = "Email cannot be blank")
     private String email;
 
-    @NotNull
+    @NotNull(message = "Age cannot be blank")
     @Min(value = 18, message = "Age must be greater than 18")
     @Max(value = 100, message = "Age is very high")
     private Integer age;
@@ -45,11 +44,11 @@ public class StudentRequestDTO {
         this.email = email;
     }
 
-    public @Min(value = 18, message = "Age must be greater than 18") @Max(value = 100, message = "Age is very high") Integer getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(@Min(value = 18, message = "Age must be greater than 18") @Max(value = 100, message = "Age is very high") Integer age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }

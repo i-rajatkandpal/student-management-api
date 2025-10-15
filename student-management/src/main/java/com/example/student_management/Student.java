@@ -1,12 +1,12 @@
 package com.example.student_management;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-
 import java.time.LocalDate;
-@Table(name = "students")
+
 @Entity
+@Table(name = "students")
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,7 +16,7 @@ public class Student {
     @Column(unique = true)
     private String email;
 
-    private @Min(value = 1) Integer age;
+    private Integer age;
 
     private String course;
 
@@ -46,11 +46,11 @@ public class Student {
         this.email = email;
     }
 
-    public @Min(value = 1) Integer getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(@Min(value = 1) Integer age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -69,8 +69,4 @@ public class Student {
     public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
-
-    public Student() {
-    }
-
 }
