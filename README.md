@@ -528,13 +528,6 @@ TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 - Docker & Docker Compose
 - PostgreSQL Integration
 
-**Recommended Next Steps:**
-1. Add JWT Authentication (Spring Security)
-2. Write Unit & Integration Tests (JUnit, Mockito)
-3. Add Pagination & Sorting
-4. Implement Logging (SLF4J, Logback)
-5. Add API Documentation (Swagger/OpenAPI)
-
 ---
 
 ## 👨‍💻 Author
@@ -557,3 +550,4 @@ This project is open source and available for educational purposes.
 - Baeldung Tutorials
 - Amigoscode YouTube Channel
 ---
+
